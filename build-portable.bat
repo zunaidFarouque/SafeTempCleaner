@@ -7,6 +7,7 @@ echo ===================================================
     --onedir ^
     --noconsole ^
     --name "SafeTempCleaner" ^
+    --icon "assets\icon.ico" ^
     --contents-directory "SafeTempCleaner_files" ^
     --collect-all customtkinter ^
     --clean ^

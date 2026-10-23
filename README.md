@@ -1,10 +1,29 @@
-# SafeTempCleaner
+<p align="center">
+  <img src="assets/logo.png" alt="SafeTempCleaner Logo" width="128" height="128">
+</p>
 
-> **Created and developed by [Md Zunaid Farouque](https://github.com/zunaidFarouque)**
+<h1 align="center">SafeTempCleaner</h1>
 
-**SafeTempCleaner** is a lightweight, non-intrusive Windows background watchdog designed to safely purge old temporary files generated during long-running batch workloads (such as ArcGIS Lidar Analyst, 3D rendering pipelines, and computational batches) without disturbing active or locked processes.
+<p align="center">
+  <em>Lightweight, non-intrusive Windows background watchdog designed to safely purge old temporary files without disturbing active or locked processes.</em>
+</p>
 
-![SafeTempCleaner Dashboard](assets/dashboard.png)
+<p align="center">
+  <a href="https://github.com/zunaidFarouque/SafeTempCleaner/releases"><img src="https://img.shields.io/github/v/release/zunaidFarouque/SafeTempCleaner?style=flat-square&color=00A3E0" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="License"></a>
+  <a href="https://scoop.sh"><img src="https://img.shields.io/badge/install-scoop-blueviolet.svg?style=flat-square" alt="Scoop"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows" alt="Platform">
+</p>
+
+<p align="center">
+  <sub>Created and developed by <strong><a href="https://github.com/zunaidFarouque">Md Zunaid Farouque</a></strong></sub>
+</p>
+
+---
+
+<p align="center">
+  <img src="assets/dashboard.png" alt="SafeTempCleaner Dashboard Preview" width="850">
+</p>
 
 ---
 

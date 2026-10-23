@@ -106,7 +106,26 @@ class Win32SystemTray:
 
     def _register_tray_icon(self) -> None:
         try:
-            hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
+            hicon = None
+            # Check for custom icon
+            possible_icons = [
+                os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets", "icon.ico"),
+                os.path.join(getattr(sys, "_MEIPASS", ""), "assets", "icon.ico"),
+            ]
+            for p in possible_icons:
+                if os.path.exists(p):
+                    try:
+                        hicon = win32gui.LoadImage(
+                            0, p, win32con.IMAGE_ICON, 0, 0, win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
+                        )
+                        if hicon:
+                            break
+                    except Exception:
+                        pass
+
+            if not hicon:
+                hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
+
             flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
             nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon, self.tooltip[:127])
             win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
