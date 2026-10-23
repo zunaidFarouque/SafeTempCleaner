@@ -262,10 +262,10 @@ Write-Host "[6/6] Triggering Scoop bucket sync in '$BucketRepo'..." -ForegroundC
 $workflowName = "sync-$PackageName.yml"
 if (-not $DryRun) {
     try {
-        gh workflow run $workflowName -R $BucketRepo
+        gh workflow run $workflowName --ref main -R $BucketRepo
         Write-Host "      Successfully dispatched $workflowName to $BucketRepo!" -ForegroundColor Cyan
     } catch {
-        Write-Warning "Failed to trigger workflow in $BucketRepo. You can manually run: gh workflow run $workflowName -R $BucketRepo"
+        Write-Warning "Failed to trigger workflow in $BucketRepo. You can manually run: gh workflow run $workflowName --ref main -R $BucketRepo"
     }
 } else {
     Write-Host "      [DryRun] Skipped workflow dispatch ($workflowName)." -ForegroundColor Gray
