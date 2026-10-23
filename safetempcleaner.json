@@ -1,0 +1,35 @@
+{
+    "version": "1.0.0",
+    "description": "Lightweight, non-intrusive Windows background temp file watchdog for ArcGIS and lab batch workloads",
+    "homepage": "https://github.com/zunaidFarouque/SafeTempCleaner",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/zunaidFarouque/SafeTempCleaner/releases/download/v1.0.0/SafeTempCleaner-v1.0.0-windows-x64.zip",
+            "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+    },
+    "bin": [
+        [
+            "SafeTempCleaner.exe",
+            "safetempcleaner"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "SafeTempCleaner.exe",
+            "SafeTempCleaner"
+        ]
+    ],
+    "persist": "config.json",
+    "checkver": {
+        "github": "https://github.com/zunaidFarouque/SafeTempCleaner"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/zunaidFarouque/SafeTempCleaner/releases/download/v$version/SafeTempCleaner-v$version-windows-x64.zip"
+            }
+        }
+    }
+}

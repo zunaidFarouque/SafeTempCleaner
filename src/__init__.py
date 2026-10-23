@@ -1,0 +1,1 @@
+"""SafeTempCleaner package."""
