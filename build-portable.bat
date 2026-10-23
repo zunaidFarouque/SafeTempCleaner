@@ -8,6 +8,8 @@ echo ===================================================
     --noconsole ^
     --name "SafeTempCleaner" ^
     --icon "assets\icon.ico" ^
+    --add-data "assets\icon.ico;assets" ^
+    --add-data "assets\logo.png;assets" ^
     --contents-directory "SafeTempCleaner_files" ^
     --collect-all customtkinter ^
     --clean ^

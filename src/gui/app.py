@@ -33,6 +33,18 @@ class SafeTempCleanerApp:
         self.root.geometry("860x640")
         self.root.minsize(760, 540)
 
+        # Set window icon
+        icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets", "icon.ico")
+        if not os.path.exists(icon_path):
+            icon_path = os.path.join(getattr(sys, "_MEIPASS", ""), "assets", "icon.ico")
+        if not os.path.exists(icon_path) and getattr(sys, "frozen", False):
+            icon_path = os.path.join(os.path.dirname(sys.executable), "SafeTempCleaner_files", "assets", "icon.ico")
+        if os.path.exists(icon_path):
+            try:
+                self.root.iconbitmap(icon_path)
+            except Exception:
+                pass
+
         # Wire engine callbacks
         self.engine.on_cleanup_completed = lambda res: self.root.after(0, self._on_cleanup_done, res)
         self.engine.on_stats_updated = lambda: self.root.after(0, self._refresh_stats_display)
