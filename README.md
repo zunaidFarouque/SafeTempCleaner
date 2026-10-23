@@ -4,6 +4,8 @@
 
 **SafeTempCleaner** is a lightweight, non-intrusive Windows background watchdog designed to safely purge old temporary files generated during long-running batch workloads (such as ArcGIS Lidar Analyst, 3D rendering pipelines, and computational batches) without disturbing active or locked processes.
 
+![SafeTempCleaner Dashboard](assets/dashboard.png)
+
 ---
 
 ## Why SafeTempCleaner?
