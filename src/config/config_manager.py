@@ -37,16 +37,29 @@ class ConfigManager:
         self.settings = AppSettings()
         self.rules: List[PathRule] = []
 
+    @property
+    def actual_filepath(self) -> str:
+        """
+        Returns the resolved file path for config.json.
+        If filepath points to an existing directory (e.g. Scoop created a directory
+        junction when persist target was not bundled in the initial archive),
+        store config.json inside that directory.
+        """
+        if os.path.exists(self.filepath) and os.path.isdir(self.filepath):
+            return os.path.join(self.filepath, "config.json")
+        return self.filepath
+
     def load(self) -> None:
         """Loads configuration from JSON file. Initializes with defaults if missing."""
+        target_path = self.actual_filepath
         with self._lock:
-            if not os.path.exists(self.filepath):
+            if not os.path.exists(target_path):
                 self._init_defaults()
                 self._save_unlocked()
                 return
 
             try:
-                with open(self.filepath, "r", encoding="utf-8") as f:
+                with open(target_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
 
                 if "settings" in data and isinstance(data["settings"], dict):
@@ -92,8 +105,9 @@ class ConfigManager:
             "settings": self.settings.to_dict(),
             "rules": [r.to_dict() for r in self.rules],
         }
-        os.makedirs(os.path.dirname(os.path.abspath(self.filepath)), exist_ok=True)
-        with open(self.filepath, "w", encoding="utf-8") as f:
+        target_path = self.actual_filepath
+        os.makedirs(os.path.dirname(os.path.abspath(target_path)), exist_ok=True)
+        with open(target_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
     def get_rules(self) -> List[PathRule]:

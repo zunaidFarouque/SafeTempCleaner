@@ -1,6 +1,27 @@
+import os
 import json
 from src.config.config_manager import ConfigManager
 from src.config.models import PathRule
+
+
+def test_config_manager_handles_directory_path(tmp_path):
+    # Simulate Scoop creating config.json as a directory junction
+    scoop_dir = tmp_path / "config.json"
+    scoop_dir.mkdir()
+
+    mgr = ConfigManager(filepath=str(scoop_dir))
+    # Should not raise PermissionError!
+    mgr.load()
+
+    assert len(mgr.get_rules()) >= 1
+    # Check that file was created inside the directory
+    nested_file = scoop_dir / "config.json"
+    assert nested_file.exists()
+    assert nested_file.is_file()
+
+    # Save should also work seamlessly
+    mgr.save()
+    assert nested_file.exists()
 
 
 def test_config_manager_self_heals_corrupted_json(tmp_path):
@@ -18,7 +39,6 @@ def test_config_manager_self_heals_corrupted_json(tmp_path):
 
 def test_config_manager_partial_or_missing_fields(tmp_path):
     cfg_file = tmp_path / "config.json"
-    # Minimal JSON with incomplete path rule
     data = {
         "rules": [
             {
